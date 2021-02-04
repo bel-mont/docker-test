@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t bel-mont/docker-test -f Dockerfile.dev .
+
+script: 
+  - docker run -e CI=true bel-mont/docker-test npm run test -- --coverage
