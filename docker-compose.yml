@@ -1,0 +1,25 @@
+version: '3'
+services:
+  web:
+    # Uncomment both of the following 2 lines if no changes are detected on windows.
+    environment: 
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes: 
+      - /app/node_modules
+      - .:/app
+  tests:
+    # Uncomment both of the following 2 lines if no changes are detected on windows.
+    environment: 
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes: 
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]
